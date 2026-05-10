@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:ipot_mobile/navigation/app_router.dart';
 import 'package:ipot_mobile/screens/home_screen.dart';
+import 'package:ipot_mobile/screens/qr_scanner_screen.dart';
+import 'package:ipot_mobile/state/cart/cart_bloc.dart';
+import 'package:ipot_mobile/state/menu/menu_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,13 +18,16 @@ class IpotApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<CartBloc>(create: (_) => CartBloc()),
+        BlocProvider<MenuBloc>(create: (_) => MenuBloc()),
+      ],
+      child: MaterialApp.router(
+        title: "IPOT",
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: HomeScreen());
+        routerConfig: AppRouter.router,
+      ),
+    );
   }
 }
