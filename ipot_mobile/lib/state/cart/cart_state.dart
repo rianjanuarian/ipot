@@ -1,6 +1,17 @@
-part of 'cart_bloc.dart';
+import 'package:equatable/equatable.dart';
+import '../../models/cart_item.dart';
 
-@immutable
-sealed class CartState {}
+class CartState extends Equatable {
+  final List<CartItem> items;
 
-final class CartInitial extends CartState {}
+  const CartState({this.items = const []});
+
+  int get itemCount => items.fold(0, (sum, i) => sum + i.quantity);
+  double get subtotal => items.fold(0.0, (sum, i) => sum + i.lineTotal);
+
+  CartState copyWith({List<CartItem>? items}) =>
+      CartState(items: items ?? this.items);
+
+  @override
+  List<Object?> get props => [items];
+}

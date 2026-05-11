@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:ipot_mobile/navigation/app_router.dart';
-import 'package:ipot_mobile/screens/home_screen.dart';
-import 'package:ipot_mobile/screens/qr_scanner_screen.dart';
+
 import 'package:ipot_mobile/state/cart/cart_bloc.dart';
 import 'package:ipot_mobile/state/menu/menu_bloc.dart';
 
