@@ -30,9 +30,13 @@ class QuantitySelector extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Btn(
-            icon: Icons.remove_rounded,
+            icon: (quantity == 1 && minQuantity == 0)
+                ? Icons.delete_outline_rounded
+                : Icons.remove_rounded,
             onTap: quantity > minQuantity ? onDecrement : null,
-            color: theme.colorScheme.primary,
+            color: (quantity == 1 && minQuantity == 0)
+                ? Colors.red
+                : theme.colorScheme.primary,
           ),
           SizedBox(
             width: mWidth * 0.1,

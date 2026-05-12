@@ -36,7 +36,6 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _controller.dispose();
     super.dispose();
   }
@@ -58,14 +57,14 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
           //header
           SafeArea(
               child: Padding(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: Row(
               children: [
-                Text(
+                const Text(
                   "IPOT",
                   style: TextStyle(color: Colors.white, letterSpacing: 5),
                 ),
-                Spacer(),
+                const Spacer(),
                 IconButton(
                   icon: const Icon(Icons.flash_on_rounded, color: Colors.white),
                   onPressed: () => _controller.toggleTorch(),
