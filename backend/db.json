@@ -163,25 +163,66 @@
           "quantity": 1,
           "customizations": [
             {
-              "option_id": 2,
+              "option_id": 1,
               "quantity": 1
             },
             {
-              "option_id": 3,
+              "option_id": 2,
               "quantity": 1
             }
           ]
         }
       ],
-      "createdAt": 1778397410397,
-      "status": "pending",
+      "createdAt": 1778602381047,
+      "status": "served",
+      "estimated_preparation_time": 15,
       "id": 1
-    }
-  ],
-  "tables": [
+    },
     {
-      "id": "T001",
-      "status": "available"
+      "table_id": "T001",
+      "items": [
+        {
+          "menu_item_id": 1,
+          "quantity": 1,
+          "customizations": [
+            {
+              "option_id": 1,
+              "quantity": 1
+            },
+            {
+              "option_id": 2,
+              "quantity": 1
+            }
+          ]
+        }
+      ],
+      "customer_note": "tetsgdjsk bdnoejdj",
+      "createdAt": 1778603791720,
+      "status": "served",
+      "estimated_preparation_time": 15,
+      "id": 2
+    },
+    {
+      "table_id": "T001",
+      "items": [
+        {
+          "menu_item_id": 1,
+          "quantity": 1,
+          "customizations": [
+            {
+              "option_id": 1,
+              "quantity": 1
+            },
+            {
+              "option_id": 2,
+              "quantity": 1
+            }
+          ]
+        }
+      ],
+      "createdAt": 1778604070901,
+      "status": "pending",
+      "id": 3
     }
   ]
 }
