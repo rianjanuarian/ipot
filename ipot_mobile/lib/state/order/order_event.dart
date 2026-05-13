@@ -24,3 +24,9 @@ class ResetOrder extends OrderEvent {
   @override
   List<Object?> get props => [];
 }
+
+class SyncPendingOrders extends OrderEvent {
+  const SyncPendingOrders();
+  @override
+  List<Object?> get props => [];
+}

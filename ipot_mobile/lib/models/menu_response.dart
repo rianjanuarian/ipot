@@ -26,6 +26,12 @@ class MenuResponse extends Equatable {
             .toList(),
       );
 
+  Map<String, dynamic> toJson() => {
+        'restaurant': restaurant.toJson(),
+        'categories': categories.map((c) => c.toJson()).toList(),
+        'items': items.map((i) => i.toJson()).toList(),
+      };
+
   List<MenuItem> itemsForCategory(int categoryId) =>
       items.where((i) => i.categoryId == categoryId).toList();
 

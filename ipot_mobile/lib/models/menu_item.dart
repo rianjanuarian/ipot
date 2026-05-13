@@ -32,6 +32,17 @@ class MenuItem extends Equatable {
             .toList(),
       );
 
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'description': description,
+        'price': price,
+        'category_id': categoryId,
+        'image_url': imageUrl,
+        'customization_groups':
+            customizationGroups.map((g) => g.toJson()).toList(),
+      };
+
   @override
   List<Object?> get props =>
       [id, name, description, price, categoryId, imageUrl, customizationGroups];

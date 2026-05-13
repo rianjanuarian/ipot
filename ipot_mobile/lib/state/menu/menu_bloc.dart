@@ -2,6 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../api/menu_api.dart';
 import 'menu_event.dart';
 import 'menu_state.dart';
+import '../../models/menu_response.dart';
+import '../../services/hive_service.dart';
 
 class MenuBloc extends Bloc<MenuEvent, MenuState> {
   final MenuApi _api;
@@ -17,9 +19,16 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
     emit(MenuLoading());
     try {
       final menu = await _api.getMenu(event.tableId);
+      await HiveService.cacheMenu(event.tableId, menu.toJson());
       emit(MenuLoaded(menu: menu));
     } catch (e) {
-      emit(MenuError('load menu failed: ${e.toString()}'));
+      final cachedData = HiveService.getCachedMenu(event.tableId);
+      if (cachedData != null) {
+        final menu = MenuResponse.fromJson(cachedData);
+        emit(MenuLoaded(menu: menu, isFromCache: true));
+      } else {
+        emit(MenuError('load menu failed: ${e.toString()}'));
+      }
     }
   }
 

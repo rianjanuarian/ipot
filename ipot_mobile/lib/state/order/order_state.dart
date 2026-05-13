@@ -15,6 +15,11 @@ class OrderSubmitting extends OrderState {
   List<Object?> get props => [];
 }
 
+class OrderQueued extends OrderState {
+  @override
+  List<Object?> get props => [];
+}
+
 class OrderSuccess extends OrderState {
   final Order order;
   const OrderSuccess(this.order);

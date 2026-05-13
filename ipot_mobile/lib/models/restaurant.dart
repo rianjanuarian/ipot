@@ -17,6 +17,12 @@ class Restaurant extends Equatable {
         tableId: json['table_id'] as String,
       );
 
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'table_id': tableId,
+      };
+
   @override
   List<Object?> get props => [id, name, tableId];
 }

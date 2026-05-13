@@ -19,8 +19,13 @@ class MenuLoading extends MenuState {
 class MenuLoaded extends MenuState {
   final MenuResponse menu;
   final String filterQuery;
+  final bool isFromCache;
 
-  const MenuLoaded({required this.menu, this.filterQuery = ''});
+  const MenuLoaded({
+    required this.menu,
+    this.filterQuery = '',
+    this.isFromCache = false,
+  });
 
   List<MenuItem> get filteredItems {
     if (filterQuery.isEmpty) return menu.items;
@@ -32,13 +37,19 @@ class MenuLoaded extends MenuState {
         .toList();
   }
 
-  MenuLoaded copyWith({MenuResponse? menu, String? filterQuery}) => MenuLoaded(
+  MenuLoaded copyWith({
+    MenuResponse? menu,
+    String? filterQuery,
+    bool? isFromCache,
+  }) =>
+      MenuLoaded(
         menu: menu ?? this.menu,
         filterQuery: filterQuery ?? this.filterQuery,
+        isFromCache: isFromCache ?? this.isFromCache,
       );
 
   @override
-  List<Object?> get props => [menu, filterQuery];
+  List<Object?> get props => [menu, filterQuery, isFromCache];
 }
 
 class MenuError extends MenuState {

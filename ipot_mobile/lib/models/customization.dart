@@ -18,6 +18,12 @@ class CustomizationOption extends Equatable {
         priceModifier: (json['price_modifier'] as num).toDouble(),
       );
 
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'price_modifier': priceModifier,
+      };
+
   @override
   List<Object?> get props => [id, name, priceModifier];
 }
@@ -47,6 +53,14 @@ class CustomizationGroup extends Equatable {
             .map((o) => CustomizationOption.fromJson(o as Map<String, dynamic>))
             .toList(),
       );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'required': required,
+        'max_selections': maxSelections,
+        'options': options.map((o) => o.toJson()).toList(),
+      };
 
   @override
   List<Object?> get props => [id, name, required, maxSelections, options];

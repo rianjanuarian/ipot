@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -69,6 +70,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 AppBar(
                   restaurantName: state.menu.restaurant.name,
                   tableId: widget.tableId,
+                  isOffline: state.isFromCache,
                 ),
                 SliverToBoxAdapter(
                   child: SearchBar(
@@ -125,9 +127,14 @@ class _MenuScreenState extends State<MenuScreen> {
 class AppBar extends StatelessWidget {
   final String restaurantName;
   final String tableId;
+  final bool isOffline;
 
-  const AppBar(
-      {super.key, required this.restaurantName, required this.tableId});
+  const AppBar({
+    super.key,
+    required this.restaurantName,
+    required this.tableId,
+    this.isOffline = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -140,21 +147,53 @@ class AppBar extends StatelessWidget {
         onPressed: () => context.go('/'),
       ),
       flexibleSpace: FlexibleSpaceBar(
-        title: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        title: Row(
           children: [
-            Text(
-              restaurantName,
-              style: theme.textTheme.titleMedium
-                  ?.copyWith(fontWeight: FontWeight.bold),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  restaurantName,
+                  style: theme.textTheme.titleMedium
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'Table $tableId',
+                  style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.primary,
+                      fontWeight: FontWeight.w600),
+                ),
+              ],
             ),
-            Text(
-              'Table $tableId',
-              style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.primary,
-                  fontWeight: FontWeight.w600),
-            ),
+            const Spacer(),
+            if (isOffline)
+              Container(
+                margin: const EdgeInsets.only(top: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: Colors.orange.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: Colors.orange.withOpacity(0.5)),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.cloud_off_rounded,
+                        size: MediaQuery.of(context).size.width * 0.05,
+                        color: Colors.orange),
+                    SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+                    Text(
+                      'Offline Mode',
+                      style: TextStyle(
+                        color: Colors.orange,
+                        fontSize: MediaQuery.of(context).size.width * 0.02,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
           ],
         ),
         titlePadding: const EdgeInsets.only(left: 56, bottom: 12),

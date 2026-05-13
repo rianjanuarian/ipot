@@ -80,6 +80,17 @@ class _CartScreenState extends State<CartScreen> {
           if (state is OrderSuccess) {
             context.read<CartBloc>().add(const ClearCart());
             context.go('/order-status/${state.order.id}');
+          } else if (state is OrderQueued) {
+            context.read<CartBloc>().add(const ClearCart());
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(
+                    'Offline mode order will be saved and sync when online'),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.orange,
+              ),
+            );
+            context.go('/');
           } else if (state is OrderError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -149,14 +160,12 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                       child: TextField(
                         controller: _noteController,
-                        maxLines: 2,
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.black),
                         decoration: InputDecoration(
                           hintText: 'Any special requests? (optional)',
                           hintStyle: TextStyle(
-                              color:
-                                  theme.colorScheme.onSurface.withOpacity(0.4),
-                              fontSize: 14),
+                            color: theme.colorScheme.onSurface.withOpacity(0.4),
+                          ),
                           prefixIcon: Icon(Icons.edit_note_rounded,
                               color:
                                   theme.colorScheme.onSurface.withOpacity(0.4)),
