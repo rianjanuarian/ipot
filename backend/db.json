@@ -223,6 +223,25 @@
       "createdAt": 1778604070901,
       "status": "pending",
       "id": 3
+    },
+    {
+      "table_id": "T001",
+      "items": [
+        {
+          "menu_item_id": 2,
+          "quantity": 1,
+          "customizations": [
+            {
+              "option_id": 5,
+              "quantity": 1
+            }
+          ]
+        }
+      ],
+      "customer_note": "testecmaka",
+      "createdAt": 1778641839102,
+      "status": "ready",
+      "id": 4
     }
   ]
 }
